@@ -12,14 +12,14 @@ export class BookDataService {
 
   baseUrl: string = 'https://gwo.pl/booksApi/v1/search?query=';
 
-  private dataSource = new BehaviorSubject<string>("default message");
+  private dataSource = new BehaviorSubject<Object>([]);
   currentData = this.dataSource.asObservable();
 
   constructor(private http:Http) { }
 
   changeData(newData: Object) {
     console.log("change data in service", newData);
-    this.dataSource.next(newData.toString())
+    this.dataSource.next(newData)
   }
 
   search(terms: Observable<string>) {

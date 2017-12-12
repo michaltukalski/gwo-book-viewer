@@ -9,7 +9,7 @@ import { BookDataService } from '../data/book-data.service';
 })
 export class BookListComponent implements OnInit {
   
-  bookData:string; 
+  bookData:Array<any>; 
 
   constructor(private data: BookDataService) { }
 

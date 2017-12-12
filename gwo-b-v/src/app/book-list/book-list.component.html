@@ -1,3 +1,33 @@
-<p>
-  {{bookData}}
-</p>
+<div class="row">
+    <ng-container *ngFor="let book of bookData">
+      <div class="col-sm-4">
+        <div class="card">
+            <img class="card-img-top" src={{book.cover}} alt="Card image cap">
+            <div class="card-block">
+              <h6 class="card-title">{{book.title}}</h6>
+              <p class="card.text">{{book.author}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p><strong>ISBN: </strong>{{book.isbn}}</p>
+                <p><strong>NR DOP. MEN: </strong>{{book.men}}</p>
+              </li>
+              <li class="list-group-item">
+                <p><strong>Przedmiot: </strong>{{book.subject}}</p>
+                <p><strong>Typ: </strong>{{book.type}}</p>
+                <p><strong>Strony: </strong>{{book.pages_count}}</p>
+              </li>
+              
+            </ul>
+            <p><strong>Poziomy nauczania</strong></p>
+            <div class="card-block">
+              <p>{{book.levels.school}}</p>
+              <p>{{book.levels.class}}</p>
+            </div>
+            <a href={{book.url}} class="btn btn-primary">Zobacz w księgarni</a>
+          </div>
+        </div>
+  </ng-container>
+ </div>
+
+
