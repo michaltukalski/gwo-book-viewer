@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookDataService } from '../data/book-data.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,16 +8,24 @@ import { BookDataService } from '../data/book-data.service';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  bookData:string; 
+  results: Object;
+  searchTerm = new Subject<string>();
   
-    constructor(private data: BookDataService) { }
-  
+  constructor(private dataService: BookDataService) {
+    this.dataService.search(this.searchTerm)
+    .subscribe(results => {
+      this.results = results;
+      this.newData(this.results);
+    });
+}
     ngOnInit() {
-      this.data.currentData.subscribe(bookData => this.bookData = bookData);
+      
     }
   
-    newData(text:string) {
-      this.data.changeData(text);
+    newData(obj:Object) {
+      if(obj){
+        this.dataService.changeData(obj);
+      }
     }
   
 }

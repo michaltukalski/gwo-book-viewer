@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+
 
 
 import { AppComponent } from './app.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BookDataService } from './data/book-data.service';
+
+
 
 
 @NgModule({
@@ -15,7 +19,8 @@ import { BookDataService } from './data/book-data.service';
     SearchBarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [BookDataService],
   bootstrap: [AppComponent]
