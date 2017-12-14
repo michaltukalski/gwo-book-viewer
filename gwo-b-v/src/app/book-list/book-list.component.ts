@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookDataService } from '../data/book-data.service';
+import { PagerService } from '../data/pager.service';
 
 
 @Component({
@@ -9,14 +10,28 @@ import { BookDataService } from '../data/book-data.service';
 })
 export class BookListComponent implements OnInit {
   
-  bookData:Array<any>; 
+  allBooksData:any; 
+  pagedData:Object;
+  pager: any = {};
 
-  constructor(private data: BookDataService) { }
-
+  constructor(private data: BookDataService, private pagerService: PagerService) { }
+  
   ngOnInit() {
-    this.data.currentData.subscribe(bookData => this.bookData = bookData);
+    this.data.currentData.subscribe(bookData =>{
+        this.allBooksData = bookData;
+        this.setPage(1);
+        
+    });
   }
 
-  
+  setPage(page: number) {
+    
+    if (page < 1 || page > this.pager.totalPages) {
+        return;
+    }
+    this.pager = this.pagerService.getPager(this.allBooksData.length, page);
+    this.pagedData = this.allBooksData.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    
+}
 
 }

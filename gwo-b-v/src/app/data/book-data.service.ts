@@ -24,14 +24,15 @@ export class BookDataService {
 
   search(terms: Observable<string>) {
     console.log("search called: ", terms)
-    return terms.debounceTime(400)
+    return terms.debounceTime(300)
       .distinctUntilChanged()
       .switchMap(term => this.searchEntries(term));
   }
 
   searchEntries(term) {
+    console.log("SSSSSSSSSSS", encodeURIComponent(term))
     return this.http
-        .get(this.baseUrl + term)
+        .get(this.baseUrl + encodeURIComponent(term))
         .map(res => res.json());
   }
 

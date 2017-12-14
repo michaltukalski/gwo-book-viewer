@@ -8,24 +8,27 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  results: Object;
+
   searchTerm = new Subject<string>();
-  
+
   constructor(private dataService: BookDataService) {
     this.dataService.search(this.searchTerm)
-    .subscribe(results => {
-      this.results = results;
-      this.newData(this.results);
-    });
-}
-    ngOnInit() {
-      
+      .subscribe(results => {
+        console.log("FFFFF", this.searchTerm)
+        this.newData(results);
+      });
+  }
+  ngOnInit() {
+
+  }
+
+  newData(obj: Object) {
+    if (obj) {
+      this.dataService.changeData(obj);
     }
+  }
+
   
-    newData(obj:Object) {
-      if(obj){
-        this.dataService.changeData(obj);
-      }
-    }
-  
+  }
+
 }

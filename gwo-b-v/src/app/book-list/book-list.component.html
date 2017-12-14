@@ -1,33 +1,64 @@
 <div class="row">
-    <ng-container *ngFor="let book of bookData">
-      <div class="col-sm-4">
-        <div class="card">
-            <img class="card-img-top" src={{book.cover}} alt="Card image cap">
-            <div class="card-block">
-              <h6 class="card-title">{{book.title}}</h6>
-              <p class="card.text">{{book.author}}</p>
+    <ng-container *ngFor="let book of pagedData">
+      <div class="col-sm-4 col">
+        <div class="card justify-content-center">
+            <div class="card-block img-holder">
+              <img class="card-img-top" src={{book.cover}} alt="Card image cap">
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <p><strong>ISBN: </strong>{{book.isbn}}</p>
-                <p><strong>NR DOP. MEN: </strong>{{book.men}}</p>
+            
+            <div class="card-block justify-content-center flex-column">
+              <h4 class="card-title">{{book.title}}</h4>
+              <h5 class="card.text">{{book.author}}</h5>
+            </div>
+            <ul class="list-group list-group-flush justify-content-center flex-column">
+              <li class="list-group-item justify-content-center flex-column">
+                <h5><strong>ISBN: </strong>{{book.isbn}}</h5>
+                <br>
+                <h5><strong>NR DOP. MEN: </strong>{{book.men}}</h5>
               </li>
-              <li class="list-group-item">
-                <p><strong>Przedmiot: </strong>{{book.subject}}</p>
-                <p><strong>Typ: </strong>{{book.type}}</p>
-                <p><strong>Strony: </strong>{{book.pages_count}}</p>
+              <li class="list-group-item justify-content-center flex-column">
+                <h5><strong>Przedmiot: </strong>{{book.subject}}</h5>
+                <br>
+                <h5><strong>Typ: </strong>{{book.type}}</h5>
+                <br>
+                <h5><strong>Strony: </strong>{{book.pages_count}}</h5>
               </li>
               
             </ul>
-            <p><strong>Poziomy nauczania</strong></p>
-            <div class="card-block">
-              <p>{{book.levels.school}}</p>
-              <p>{{book.levels.class}}</p>
+            <div class="card-block justify-content-center flex-column">
+              <h5><strong>Poziomy nauczania:</strong></h5>
+              <h5>{{book.levels["0"].school}}</h5>
+              <h5>{{book.levels["0"].class}}</h5>
             </div>
-            <a href={{book.url}} class="btn btn-primary">Zobacz w księgarni</a>
+            <a href={{book.url}} class="btn btn-primary bookstore-btn">Zobacz w księgarni</a>
           </div>
         </div>
   </ng-container>
  </div>
+
+ <div>
+  <div class="container justify-content-center">
+      <div class="justify-content-center" *ngIf="pagedData.length > 1">
+
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-center">
+              <li [ngClass]="{disabled:pager.currentPage === 1}" class="btn">
+                  <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}" class="btn">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="btn">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="btn">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="btn">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
 
 

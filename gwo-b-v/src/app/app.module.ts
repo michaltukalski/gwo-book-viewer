@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BookDataService } from './data/book-data.service';
+import { PagerService } from './data/pager.service';
 
 
 
@@ -22,7 +23,7 @@ import { BookDataService } from './data/book-data.service';
     BrowserModule,
     HttpModule
   ],
-  providers: [BookDataService],
+  providers: [BookDataService, PagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
