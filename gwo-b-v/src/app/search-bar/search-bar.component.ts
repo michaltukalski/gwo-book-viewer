@@ -27,8 +27,4 @@ export class SearchBarComponent implements OnInit {
       this.dataService.changeData(obj);
     }
   }
-
-  
-  }
-
 }
