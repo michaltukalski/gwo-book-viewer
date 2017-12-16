@@ -10,7 +10,7 @@ export class PagerService {
        if (totalPages === 0){
          totalPages = 1;
        }
-       console.log("CEIL", totalPages);
+       
        let startPage: number, endPage: number;
        if (totalPages <= 10) {
            // less than 10 total pages so show all

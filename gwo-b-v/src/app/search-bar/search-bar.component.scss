@@ -6,3 +6,16 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.gly-spin {
+    
+    animation: spin 2s infinite linear;
+    font-size: 40px;
+  }
+
+  @keyframes spin {
+   
+    100% {
+      transform: rotate(359deg);
+    }
+  }

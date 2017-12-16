@@ -13,7 +13,6 @@ export class BookListComponent implements OnInit {
   allBooksData:any; 
   pagedData:Object;
   pager: any = {};
-  showNoResultInfo: boolean = false;
 
   constructor(private data: BookDataService, private pagerService: PagerService) { }
   
@@ -24,13 +23,10 @@ export class BookListComponent implements OnInit {
         this.setPage(1);
         
     });
-    this.showNoResultInfo = false;
-    
+
   }
 
   setPage(page: number) {
-    this.showNoResultInfo = true;
-
     if (page < 1 || page > this.pager.totalPages) {
         return;
     }

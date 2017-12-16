@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookDataService } from '../data/book-data.service';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,14 +10,23 @@ import { Subject } from 'rxjs/Subject';
 })
 export class SearchBarComponent implements OnInit {
 
-  searchTerm = new Subject<string>();
+  searchTerm = new BehaviorSubject<string>("");
+  showNoResultInfo:boolean = false;
+  showLoader:boolean = false;
+  searchResultsLength:number = 0;
 
   constructor(private dataService: BookDataService) {
     this.dataService.search(this.searchTerm)
       .subscribe(results => {
-        console.log("FFFFF", this.searchTerm)
+        this.searchResultsLength = results.length;
+        this.showNoResultInfo = this.searchTerm.value !== "";
+        this.showLoader = false;
         this.newData(results);
       });
+
+    this.searchTerm.subscribe({
+      next: (value) => this.showLoader = (value !== "")
+    })
   }
   ngOnInit() {
 
@@ -27,4 +37,5 @@ export class SearchBarComponent implements OnInit {
       this.dataService.changeData(obj);
     }
   }
+
 }

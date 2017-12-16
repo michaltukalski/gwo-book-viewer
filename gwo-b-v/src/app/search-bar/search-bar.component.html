@@ -1,3 +1,10 @@
 <div class="input-container justify-content-center">
     <input class="form-control input" (keyup)="searchTerm.next($event.target.value)" placeHolder = "Szukaj książek...">
 </div>
+
+<i class="glyphicon glyphicon-cog gly-spin" *ngIf='showLoader'></i>
+
+<div class='no-results justify-content-center' *ngIf='searchResultsLength == 0 && showNoResultInfo && !showLoader'>
+    <h2>Szukana fraza nie została odnaleziona.</h2>
+    <h2>Spróbuj ponownie.</h2>
+</div>
